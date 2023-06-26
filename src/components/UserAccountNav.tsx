@@ -3,14 +3,14 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
-import { User } from "next-auth";
-import { FC } from "react";
-import UserAvatar from "./UserAvatar";
 import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "./ui/DropdownMenu.tsx";
+import { User } from "next-auth";
+import { FC } from "react";
+import UserAvatar from "./UserAvatar";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 
