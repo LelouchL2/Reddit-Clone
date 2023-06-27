@@ -41,7 +41,7 @@ const Page = () => {
         }
 
         if (err.response?.status === 401) {
-          console.log("Unauthorized");
+          // console.log("Unauthorized");
           return loginToast();
         }
       }
