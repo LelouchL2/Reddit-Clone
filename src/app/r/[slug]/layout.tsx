@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { format } from "date-fns";
+import SubscribeLeaveToggle from "@/components/SubscribeLeaveToggle";
 
 const layout = async ({
   children,
@@ -86,13 +87,13 @@ const layout = async ({
                 </div>
               ) : null}
 
-              {/* {subreddit.creatorId !== session?.user?.id ? (
+              {subreddit.creatorId !== session?.user?.id ? (
                 <SubscribeLeaveToggle
                   isSubscribed={isSubscribed}
                   subredditId={subreddit.id}
                   subredditName={subreddit.name}
                 />
-              ) : null} */}
+              ) : null}
               {/* <Link
                 className={buttonVariants({
                   variant: "outline",
