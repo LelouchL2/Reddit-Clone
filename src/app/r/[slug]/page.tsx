@@ -3,6 +3,7 @@ import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
 import MiniCreatePost from "@/components/MiniCreatePost";
+import PostFeed from "@/components/PostFeed";
 
 interface pageProps {
   params: {
@@ -25,6 +26,9 @@ const page = async ({ params }: pageProps) => {
           comments: true,
           subreddit: true,
         },
+        orderBy: {
+          createdAt: "desc",
+        },
 
         take: INFINITE_SCROLLING_PAGINATION_RESULTS,
       },
@@ -40,7 +44,7 @@ const page = async ({ params }: pageProps) => {
       </h1>
       <MiniCreatePost session={session} />
       {/* TODO: Show posts in the feed */}
-      {/* <PostFeed initialPosts={subreddit.posts} subredditName={subreddit.name} /> */}
+      <PostFeed initialPosts={subreddit.posts} subredditName={subreddit.name} />
     </>
   );
 };

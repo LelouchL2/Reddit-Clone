@@ -29,7 +29,7 @@ export async function POST(req: Request) {
 
     await db.post.create({
       data: {
-        tittle: title,
+        title: title,
         content,
         authorId: session.user.id,
         subredditId,
