@@ -7,7 +7,8 @@ import { ArrowBigDown, ArrowBigUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
 import { PostVoteValidator } from "@/lib/validators/vote";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { toast } from "@/hooks/use-toast";
 
 interface PostVoteClientProps {
   postId: string;
@@ -37,6 +38,38 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
       };
 
       await axios.patch("/api/subreddit/post/vote", payload);
+    },
+    onError: (err, voteType) => {
+      if (voteType === "UP") setVotesAmt((prev) => prev - 1);
+      else setVotesAmt((prev) => prev + 1);
+
+      // reset current vote
+      setCurrentVote(prevVote);
+
+      if (err instanceof AxiosError) {
+        if (err.response?.status === 401) {
+          return loginToast();
+        }
+      }
+
+      return toast({
+        title: "Something went wrong.",
+        description: "Your vote was not registered. Please try again.",
+        variant: "destructive",
+      });
+    },
+    onMutate: (VoteType) => {
+      if (currentVote === VoteType) {
+        setCurrentVote(undefined);
+        if (VoteType === "UP") setVotesAmt((prev) => prev - 1);
+        else if (VoteType === "DOWN") setVotesAmt((prev) => prev + 1);
+      } else {
+        setCurrentVote(VoteType);
+        if (VoteType === "UP")
+          setVotesAmt((prev) => prev + (currentVote ? 2 : 1));
+        else if (VoteType === "DOWN")
+          setVotesAmt((prev) => prev - (currentVote ? 2 : 1));
+      }
     },
   });
 
