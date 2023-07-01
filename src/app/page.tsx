@@ -2,7 +2,7 @@ import CustomFeed from "@/components/Feed/CustomFeed";
 import GeneralFeed from "@/components/Feed/GeneralFeed";
 import { buttonVariants } from "@/components/ui/Button";
 import { getAuthSession } from "@/lib/auth";
-import { HomeIcon } from "lucide-react";
+import { ArrowBigDown, ArrowBigUp, HomeIcon, Loader2 } from "lucide-react";
 import Link from "next/link";
 
 export default async function Home() {
@@ -41,5 +41,26 @@ export default async function Home() {
         </div>
       </div>
     </>
+  );
+}
+
+function PostVoteShell() {
+  return (
+    <div className="flex items-center flex-col pr-6 w-20">
+      {/* upvote */}
+      <div className={buttonVariants({ variant: "ghost" })}>
+        <ArrowBigUp className="h-5 w-5 text-zinc-700" />
+      </div>
+
+      {/* score */}
+      <div className="text-center py-2 font-medium text-sm text-zinc-900">
+        <Loader2 className="h-3 w-3 animate-spin" />
+      </div>
+
+      {/* downvote */}
+      <div className={buttonVariants({ variant: "ghost" })}>
+        <ArrowBigDown className="h-5 w-5 text-zinc-700" />
+      </div>
+    </div>
   );
 }
