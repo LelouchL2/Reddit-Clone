@@ -45,6 +45,7 @@ const page = async ({ params }: pageProps) => {
       <MiniCreatePost session={session} />
       {/* TODO: Show posts in the feed */}
       {/* @ts-expect-error */}
+
       <PostFeed initialPosts={subreddit.posts} subredditName={subreddit.name} />
     </>
   );

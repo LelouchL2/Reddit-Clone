@@ -34,6 +34,9 @@ const CustomFeed = async () => {
     },
     take: INFINITE_SCROLLING_PAGINATION_RESULTS,
   });
+
+  /* @ts-expect-error */
+
   return <PostFeed initialPosts={posts} />;
 };
 
