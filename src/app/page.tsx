@@ -2,8 +2,10 @@ import CustomFeed from "@/components/Feed/CustomFeed";
 import GeneralFeed from "@/components/Feed/GeneralFeed";
 import { buttonVariants } from "@/components/ui/Button";
 import { getAuthSession } from "@/lib/auth";
-import { ArrowBigDown, ArrowBigUp, HomeIcon, Loader2 } from "lucide-react";
+import { HomeIcon } from "lucide-react";
 import Link from "next/link";
+
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const session = await getAuthSession();
